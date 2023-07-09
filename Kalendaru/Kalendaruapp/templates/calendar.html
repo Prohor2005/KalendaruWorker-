@@ -1,0 +1,216 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}
+Kalendaru - Календар
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/calendar.css' %}">
+{% endblock %}
+{% block modal %}
+
+    <div class="modalLegend" style="display: none">
+        <p class="legend-title">Легенда</p>
+        <div class="legend-item">
+            <div class="legend-cell" style='background: #D0FAFB'>
+                1
+            </div>
+            <p class="legend-text">Події користувача</p>
+        </div>
+        <div class="legend-item">
+            <div class="legend-cell" style="background: #FFDE66">
+                2
+            </div>
+            <p class="legend-text">Офіційні події</p>
+        </div>
+        <div class="legend-item">
+            <div class="legend-cell" style="background: #00FFB3">
+                3
+            </div>
+            <p class="legend-text">Події щодо Kalendaru</p>
+        </div>
+        <button class="legend-close">Зрозуміло</button>
+    </div>
+{% endblock %}
+{% block content %}
+    <div id='tasksObjects' hidden>
+        {% for task in tasks %}
+            <div class='taskObj' id='{{ task.pk }}'>
+                <input type="hidden" class='taskPk' value="{{ task.pk }}">
+                <input type="hidden" class='taskName' value="{{ task.name }}">
+                <input type="hidden" class='taskDate' value="{{ task.date_added }}">
+                <input type="hidden" class='taskEvent' value="{{ task.action }}">
+                <input type="hidden" class='taskComplete' value="{{ task.hascompleted }}">
+                <input type="hidden" class='taskDesc' value="{{ task.description }}">
+            </div>
+        {% endfor %}
+    </div>
+    <div id='notesObjects' hidden>
+        {% for note in notes %}
+            <div class='noteObj' id='{{ note.pk }}'>
+                <input type="hidden" class='notePk' value="{{ note.pk }}">
+                <input type="hidden" class='noteName' value="{{ note.name }}">
+                <input type="hidden" class='noteDate' value="{{ note.date_added }}">
+                <input type="hidden" class='noteEvent' value="{{ note.action }}">
+                <input type="hidden" class='noteDesc' value="{{ note.description }}">
+            </div>
+        {% endfor %}
+    </div>
+    <div id='actionsObjects' hidden>
+        {% for action in actions %}
+        <div class='actionObj' id='{{ action.pk }}'>
+            <input type="hidden" class='actionPk' value="{{ action.pk }}">
+            <input type="hidden" class='actionName' value="{{ action.name }}">
+            <input type="hidden" class='actionDate' value="{{ action.date }}">
+            <input type="hidden" class='actionEvent' value="{{ action.actions }}">
+            <input type="hidden" class='actionDesc' value="{{ action.description }}">
+            <input type="hidden" class='actionKalendaru' value="{{ action.iskalendaru }}">
+            <input type="hidden" class='actionOfficial' value="{{ action.isofficial }}">
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="calendar">
+        <div class="calendar-left">
+            <div class="year-choice">
+                
+           </div>
+           <div class="months">
+                <div id='01' class="month jan">Січень</div>
+                <hr>
+                <div id='02' class="month feb">Лютий</div>
+                <hr>
+                <div id='03' class="month mar">Березень</div>
+                <hr>
+                <div id='04' class="month apr">Квітень</div>
+                <hr>
+                <div id='05' class="month may">Травень</div>
+                <hr>
+                <div id='06' class="month jun">Червень</div>
+                <hr>
+                <div id='07' class="month jul">Липень</div>
+                <hr>
+                <div id='08' class="month aug">Серпень</div>
+                <hr>
+                <div id='09' class="month sep">Вересень</div>
+                <hr>
+                <div id='10' class="month oct">Жовтень</div>
+                <hr>
+                <div id='11' class="month nov">Листопад</div>
+                <hr>
+                <div id='12' class="month dec">Грудень</div>
+           </div> 
+
+           
+
+           <div class="days-on-week">
+                {% comment %} Здесь писать {% endcomment %}
+                <h4 class='day-week'>Пн</h4>
+                <hr>
+                <h4 class='day-week'>Вт</h4>
+                <hr>
+                <h4 class='day-week'>Ср</h4>
+                <hr>
+                <h4 class='day-week'>Чт</h4>
+                <hr>
+                <h4 class='day-week'>Пт</h4>
+                <hr>
+                <h4 class='day-week'>Сб</h4>
+                <hr>
+                <h4 class='day-week'>Вс</h4>
+           </div>
+
+
+
+           <div class="calendar-content" id='01'>
+                 <ul class="calendar-dates">
+
+                 </ul>
+                {% comment %} <div class="week">
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                {% comment %} </div> {% endcomment %}
+                {% comment %} <div class="week"> {% endcomment %}
+                {% comment %}    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>{% endcomment %}
+                {% comment %} </div> {% endcomment %}
+                {% comment %} <div class="week"> {% endcomment %}
+                {% comment %}    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>{% endcomment %}
+                {% comment %} </div> {% endcomment %}
+                {% comment %} <div class="week"> {% endcomment %}
+                {% comment %}    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>{% endcomment %}
+                {% comment %} </div> {% endcomment %}
+                {% comment %} <div class="week"> {% endcomment %}
+                {% comment %}    <div class="day">29</div>
+                    <div class="day">30</div>
+                    <div class="day">31</div>
+                    <div class="day no-active-day">1</div>
+                    <div class="day no-active-day">2</div>
+                    <div class="day no-active-day">3</div>
+                    <div class="day no-active-day">4</div> {% endcomment %}
+                {% comment %} </div>  {% endcomment %}
+                {% comment %} {% for week in calendar %}
+                    <div class='week'>
+                        {% for days in week %}
+                            <div class='day'>
+                                {{ days }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %} {% endcomment %}
+                <button class="legend">Легенда</button> 
+           </div>
+        </div>
+        <div class="calendar-right">
+            {% comment %} Здесь Прохор пишет {% endcomment %}
+            {% comment %} <p>На цей день нічого не заплановано</p> {% endcomment %}
+            <h4 class="area-name"></h4>
+            <div class="area-date">
+
+            </div>
+            <div class="area-event">
+
+            </div>
+            <div class="area-desc">
+
+            </div>
+            <form action="{% url 'calendar' %}" method="POST" class="form-buttons">
+                {% csrf_token %}
+                <input type="hidden" name="pkForm" class='pkForm'>
+                <input type="hidden" name="taskornote" class="taskornote">
+                <button class="text-button button-cal" name="make-completed">Відзначити, як виконане</button>
+                <button class="text-button button-cal" name="remove">Видалити</button>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+<script src="{% static 'js/manipulate.js' %}" defer></script>
+<script src="{% static 'js/calendar.js' %}" defer></script>
+{% endblock %}

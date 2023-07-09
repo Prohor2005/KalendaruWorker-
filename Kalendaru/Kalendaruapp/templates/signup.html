@@ -1,0 +1,48 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}
+Kalendaru - Реєстрація
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="signup">
+        <h1>Реєстрація</h1>
+        <form method="POST" id="form-signin"  class="needs-validation" novalidate>
+            {% csrf_token %}
+            <input class="input form-control" required type="text" name="nickname" id='login' maxlength="20" placeholder="Логін">
+            <input class="input form-control" required type="email" name="email" id='email' placeholder="Електронна пошта">
+            <input class="input form-control" required type="password" name="password" id='password' placeholder="Пароль">
+            
+            <input type="file" style="display: none;" name="avatar" value="{% static 'img/noavatar.png' %}">
+            <div class="checkbox">
+                {% comment %} <input required type="checkbox" name="checkbox"> {% endcomment %}
+                {% comment %} <p class="agree">Я погоджуюсь з політикою конфіденційності про та умовою використання Kalendaru</p> {% endcomment %}
+                {% comment %} <div class="form-check form-switch messages-button">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Я погоджуюсь з умовами положення про та угодою користувача</label>
+                </div> {% endcomment %}
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" name='checkbox' required role="switch" id="flexSwitchCheckDefault checkbox">
+                  {% comment %} <label class="form-check-label" for="flexSwitchCheckDefault">Я погоджуюсь з політикою конфіденційності про та умовою використання Kalendaru</label> {% endcomment %}
+                    <p class="agree">Я погоджуюсь з політикою конфіденційності про та умовою використання Kalendaru</p>
+                </div>
+            </div>
+            <div class="buttons-signup">
+                <button class="button-signup">Зареєструватися</button>
+                <a href="{% url 'login' %}" class="button-signup" style='color: #000000;text-decoration: none;'>Вхід</a>
+            </div>
+            
+        </form>
+        
+    </div>
+    <p style='color: #A51C1C'>{{ error_text }}</p>
+{% endblock %}
+
+{% comment %} {% block js %}
+<script src="{% static 'js/signup.js' %}" defer></script>
+{% endblock %} {% endcomment %}
